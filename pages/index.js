@@ -1,37 +1,48 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import {useState} from 'react';
+import { useState } from "react";
+import Script from "next/script";
 
-import ReactGA from 'react-ga';
-ReactGA.initialize('G-TC0HWJJCNE');
-ReactGA.pageview(window.location.pathname);
+// import ReactGA from 'react-ga';
+// ReactGA.initialize('G-TC0HWJJCNE');
+// ReactGA.pageview(window.location.pathname);
 
 const SearchBar = () => {
   const [code, setCode] = useState(null);
   async function onSubmit(event) {
     event.preventDefault();
     const text = event.target[0].value;
-    setCode('Loading...');
-    await fetch('https://autodoc-backend.fly.dev/compose?' + new URLSearchParams({
-      query: text,
-    })).then(response => response.json()).then(output => {
-      console.log({output});
-      setCode(output.code)
-    })
+    setCode("Loading...");
+    await fetch(
+      "https://autodoc-backend.fly.dev/compose?" +
+        new URLSearchParams({
+          query: text,
+        })
+    )
+      .then((response) => response.json())
+      .then((output) => {
+        console.log({ output });
+        setCode(output.code);
+      });
   }
   // const gradient = 'linear-gradient( 64.5deg,  rgba(245,116,185,1) 14.7%, rgba(89,97,223,1) 88.7% );'
-  const gradient = 'radial-gradient( circle farthest-corner at 92.3% 71.5%,  rgba(83,138,214,1) 0%, rgba(134,231,214,1) 90% );'
+  const gradient =
+    "radial-gradient( circle farthest-corner at 92.3% 71.5%,  rgba(83,138,214,1) 0%, rgba(134,231,214,1) 90% );";
   return (
-    <div style={{
-      'background-image': gradient,
-      padding: '20px',
-      borderRadius: '10px'
-    }}>
+    <div
+      style={{
+        "background-image": gradient,
+        padding: "20px",
+        borderRadius: "10px",
+      }}
+    >
       <form onSubmit={onSubmit}>
         <div className="announcer text">
-          <h3 style={{paddingTop: 0, marginTop: 0}}>Jump right in!</h3>
-          <h5 style={{paddingTop: 0, marginTop: 0}}>Describe what you want to accomplish and we will generate it</h5>
+          <h3 style={{ paddingTop: 0, marginTop: 0 }}>Jump right in!</h3>
+          <h5 style={{ paddingTop: 0, marginTop: 0 }}>
+            Describe what you want to accomplish and we will generate it
+          </h5>
         </div>
         <div
           className="bar-container"
@@ -46,25 +57,22 @@ const SearchBar = () => {
             aria-label="Search the docs ..."
             autoComplete="off"
           />
-          <input type="submit" style={{marginLeft: '10px'}}/>
+          <input type="submit" style={{ marginLeft: "10px" }} />
         </div>
       </form>
       <div
         id="output-container"
         style={{
-          marginTop: '10px',
+          marginTop: "10px",
           width: "100%",
           // minHeight: 100,
         }}
       >
         {code ? (
-        <div className="highlight">
-          <pre>
-          {code}
-          </pre>
-        </div>
+          <div className="highlight">
+            <pre>{code}</pre>
+          </div>
         ) : null}
-
       </div>
     </div>
   );
@@ -138,6 +146,20 @@ export default function Home() {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="docsearch:language" content="None" />
       {/* Google Analytics */}
+      <Script
+        async
+        id="google-analytics"
+        src="https://www.googletagmanager.com/gtag/js?id=G-TC0HWJJCNE"
+      ></Script>
+      <Script id="google-analytics-2">
+        {`
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TC0HWJJCNE');
+  `}
+      </Script>
       <div className="container-fluid" id="banner" />
       <nav
         className="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar"
@@ -288,7 +310,7 @@ export default function Home() {
             <div className="sidebar-start-items">
               <form
                 className="bd-search d-flex align-items-center"
-                action="search.html"
+                action="https://numpy.org/doc/stable/search.html"
                 method="get"
               >
                 <i className="icon fas fa-search" />

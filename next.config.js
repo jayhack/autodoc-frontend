@@ -23,6 +23,10 @@ const nextConfig = {
       {
         source: '/release.html',
         destination: '/html/release.html',
+      },
+      {
+        source: '/search.html',
+        destination: '/html/search.html'
       }
     ]
   }
