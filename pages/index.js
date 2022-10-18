@@ -3,6 +3,10 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import {useState} from 'react';
 
+import ReactGA from 'react-ga';
+ReactGA.initialize('G-TC0HWJJCNE');
+ReactGA.pageview(window.location.pathname);
+
 const SearchBar = () => {
   const [code, setCode] = useState(null);
   async function onSubmit(event) {
@@ -247,7 +251,7 @@ export default function Home() {
                     <a
                       className="nav-link"
                       href="https://github.com/numpy/numpy"
-                      rel="noopener"
+                      rel="noreferrer"
                       target="_blank"
                       title="GitHub"
                     >
@@ -261,7 +265,7 @@ export default function Home() {
                     <a
                       className="nav-link"
                       href="https://twitter.com/numpy_team"
-                      rel="noopener"
+                      rel="noreferrer"
                       target="_blank"
                       title="Twitter"
                     >
